@@ -13,7 +13,6 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -94,6 +93,7 @@
                         <outlet property="signInViewBottomConstraint" destination="MhM-V2-YmV" id="DL0-QE-4kF"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
         <!--Channels View Controller-->
@@ -103,9 +103,34 @@
                     <view key="view" contentMode="scaleToFill" id="m8b-av-csP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="pwm-jh-dtT">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChannelTableViewCell" id="wOP-DK-KVR" customClass="ChannelTableViewCell" customModule="Twitter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wOP-DK-KVR" id="xVK-Zo-hql">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pwm-jh-dtT" firstAttribute="leading" secondItem="p7S-eo-ghi" secondAttribute="leading" id="JOf-SY-cJD"/>
+                            <constraint firstItem="p7S-eo-ghi" firstAttribute="bottom" secondItem="pwm-jh-dtT" secondAttribute="bottom" id="Nhs-HI-Ilm"/>
+                            <constraint firstItem="pwm-jh-dtT" firstAttribute="top" secondItem="p7S-eo-ghi" secondAttribute="top" id="YY9-hj-9xb"/>
+                            <constraint firstItem="p7S-eo-ghi" firstAttribute="trailing" secondItem="pwm-jh-dtT" secondAttribute="trailing" id="or2-va-jlK"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="p7S-eo-ghi"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="pwm-jh-dtT" id="fTJ-ep-eNk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hT5-AB-6za" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
