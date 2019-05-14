@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 import MessageKit
 
-class Message: MessageType {
+struct Message: MessageType {
     
     let id: String?
     let content: String
@@ -35,7 +35,7 @@ class Message: MessageType {
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()
         
-        guard let sentDate = data["created"] as? Date else {
+        guard let sentDate = data["created"] as? Timestamp else {
             return nil
         }
         guard let senderID = data["senderID"] as? String else {
@@ -47,7 +47,7 @@ class Message: MessageType {
         
         id = document.documentID
         
-        self.sentDate = sentDate
+        self.sentDate = sentDate.dateValue()
         sender = Sender(senderId: senderID, displayName: senderName)
         
         if let content = data["content"] as? String {
@@ -63,7 +63,8 @@ extension Message: DataObjectSerializable {
         return [
             "created": sentDate,
             "senderID": sender.senderId,
-            "senderName": sender.displayName
+            "senderName": sender.displayName,
+            "content": content
         ]
     }
 }

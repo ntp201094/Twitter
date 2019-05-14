@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -81,13 +81,13 @@ class LoginViewController: UIViewController {
     }
     
     private func showMissingNameAlert() {
-        let ac = UIAlertController(title: "Display Name Required", message: "Please enter a display name.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: { _ in
+        let alertController = UIAlertController(title: "Display Name Required", message: "Please enter a display name.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: { _ in
             DispatchQueue.main.async {
                 self.nameTextField.becomeFirstResponder()
             }
         }))
-        present(ac, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
 }

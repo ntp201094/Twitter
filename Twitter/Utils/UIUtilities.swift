@@ -65,3 +65,61 @@ extension UIView {
     }
     
 }
+
+extension String {
+    func chunks(maxLength: Int = 50) -> [String]? {
+        guard self.count > maxLength else { return [self] }
+        
+        let words = self.components(separatedBy: .whitespacesAndNewlines).filter { $0 != "" }
+        guard words.count != 0 else { return nil }
+        let trimmedString = words.joined(separator: " ")
+        
+        var isNeedMoreChunks = true
+        var result: [String] = []
+        var numberOfChunks = (trimmedString.count / maxLength) + ((trimmedString.count % maxLength)  == 0 ? 0 : 1)
+        
+        repeat {
+            guard let chunks = trimmedString.chunking(words, into: numberOfChunks, maxLength: maxLength) else { return nil }
+            
+            // if the last chunk's length is longer than maxLength, re-chunking with new numberOfChunks
+            if let last = chunks.last, last.count > maxLength {
+                isNeedMoreChunks = true
+            } else {
+                isNeedMoreChunks = false
+                result = chunks
+            }
+            numberOfChunks += 1
+        } while isNeedMoreChunks == true
+        
+        return result
+    }
+    
+    private func chunking(_ words: [String], into numberOfChunks: Int, maxLength: Int) -> [String]? {
+        var chunks: [String] = []
+        var current = "1/\(numberOfChunks)"
+        guard current.count < maxLength else { return nil }
+        
+        for (index, word) in words.enumerated() {
+            guard word.count <= maxLength else { return nil }
+            // plus 1 for a blank
+            let count = current.count + word.count + 1
+            
+            // if the numberOfChunks is not enough, appending all word to string for the last chunk.
+            if count > maxLength && chunks.count < (numberOfChunks - 1) {
+                // current string has enough length
+                chunks.append(current)
+                current = "\(chunks.count + 1)/\(numberOfChunks) " + String(word)
+            } else {
+                // append word to current string
+                current += " " + String(word)
+            }
+            
+            // add last word as last string
+            if index == (words.count - 1) {
+                chunks.append(current)
+            }
+        }
+        
+        return chunks
+    }
+}

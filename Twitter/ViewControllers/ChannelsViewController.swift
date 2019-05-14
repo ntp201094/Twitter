@@ -9,7 +9,7 @@
 import FirebaseAuth
 import FirebaseFirestore
 
-class ChannelsViewController: UIViewController {
+final class ChannelsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -96,11 +96,11 @@ extension ChannelsViewController {
 // MARK: - Event Handlers
 extension ChannelsViewController {
     private func createChannel() {
-        guard let ac = currentChannelAlertController else {
+        guard let alertController = currentChannelAlertController else {
             return
         }
         
-        guard let channelName = ac.textFields?.first?.text else {
+        guard let channelName = alertController.textFields?.first?.text else {
             return
         }
         
@@ -234,9 +234,9 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let chatVC = ChatViewController.storyboardInstance() else { return }
-//        let channel = channels[indexPath.row]
-//        show(chatVC, sender: self)
+        let channel = channels[indexPath.row]
+        let chatVC = ChatViewController(user: currentUser, channel: channel)
+        show(chatVC, sender: self)
     }
     
 }

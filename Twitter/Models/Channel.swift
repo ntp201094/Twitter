@@ -8,7 +8,7 @@
 
 import FirebaseFirestore
 
-class Channel {
+struct Channel {
     
     let id: String?
     let name: String
