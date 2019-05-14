@@ -10,15 +10,6 @@ import XCTest
 @testable import Twitter
 
 class TwitterTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testExample() {
         let input = "I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself."
         let expected = ["1/2 I can't believe Tweeter now supports chunking",
@@ -137,15 +128,14 @@ class TwitterTests: XCTestCase {
                         "30/33 messages, so I don't have to do it myself. I",
                         "31/33 can't believe Tweeter now supports chunking",
                         "32/33 my messages, so I don't have to do it",
-                        "33/33 myself."
-        ]
+                        "33/33 myself."]
         
         guard let output = input.chunks() else {
             XCTFail("Message is empty or contains a span of non-whitespace characters longer than 50 characters")
             return
         }
         
-        XCTAssertEqual(output.count, 33, "33 part")
+        XCTAssertEqual(output.count, 33, "33 parts")
         XCTAssertEqual(output, expected, "Success!")
     }
 
